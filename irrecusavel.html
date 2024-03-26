@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You <3</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden; /* Para esconder os corações que ultrapassam a borda inferior da tela */
+        background-color: #111; /* Cor de fundo escura */
+        color: #fff; /* Cor do texto */
+    }
+    #pedido {
+        background-color: #333; /* Cor de fundo mais escura */
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Sombra com cor invertida */
+    }
+    button {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .heart {
+        position: absolute;
+        animation: fall 5s linear infinite;
+        color: #ff7272; /* Cor dos corações */
+    }
+    @keyframes fall {
+        0% {
+            transform: translateY(-100vh);
+        }
+        100% {
+            transform: translateY(100vh);
+        }
+    }
+</style>
+</head>
+<body>
+<div id="pedido">
+    <h2>Você Quer Namorar Comigo?</h2>
+    <button id="sim" onclick="gotomusic()">Sim</button>
+    <button id="nao">Não</button>
+</div>
+
+<script>
+  const naoButton = document.getElementById('nao');
+
+  naoButton.addEventListener('click', () => {
+      const maxX = window.innerWidth - naoButton.clientWidth;
+      const maxY = window.innerHeight - naoButton.clientHeight;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      naoButton.style.position = 'absolute';
+      naoButton.style.left = `${randomX}px`;
+      naoButton.style.top = `${randomY}px`;
+  });
+  
+function gotomusic() {
+  setTimeout(sendHearts, 100)
+  setTimeout(sendHearts, 1800)
+  setTimeout(gotomusicx, 3000) 
+  function gotomusicx() {
+  window.location.href = "https://www.youtube.com/watch?v=kPhpHvnnn0Q"
+  }
+  }
+
+function sendHearts() {
+    const numberOfHearts = 20; // Número de corações que caem
+    for (let i = 0; i < numberOfHearts; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️'; // Emoji de coração
+        const randomX = Math.random() * window.innerWidth;
+        heart.style.left = `${randomX}px`;
+        document.body.appendChild(heart);
+    }
+}
+</script>
+</body>
+</html>

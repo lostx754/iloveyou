@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px; /* Espaçamento para centralizar os cartões verticalmente */
+    }
+    
+    .cardx {
+      width: auto;
+      height: auto;
+      border: 1px solid black;
+      background-color: #333;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 300px;
+      margin-left: 10px;
+      padding: 20px;
+      opacity: 0; /* Inicialmente transparente */
+      transition: opacity 0.5s ease; /* Transição suave de opacidade */
+      position: relative;
+    }
+
+    .active {
+      opacity: 1; /* Torna visível */
+    }
+    
+    .card {
+      background-color: #333;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 300px;
+      padding: 20px;
+      position: fixed;
+    }
+
+    .card-content {
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: darkred;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: black;
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .fadeOutAnimation {
+      animation: fadeOut 0.5s ease forwards;
+    }
+
+    .fadeInAnimation {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="cardx" id="cardx1">
+      <!-- Conteúdo do primeiro cartão -->
+      <h2>❤️</h2>
+      <p>Desde o Primeiro dia que nos Conhecemos, eu senti algo diferente em ti..., Uma Pessoa incrivel, Engraçada, parceira, e extremamente especial</p>
+    </div>
+    <div class="cardx" id="cardx2">
+      <!-- Conteúdo do segundo cartão -->
+      <h2>❤️</h2>
+      <p>e com o passar do tempo, o sentimento de amizade foi mudando.. e se transformou em amor, e é com voce q quero passar todos os momentos bons e ruins, ate o fim de nossas vidas!</p>
+    </div>
+  </div>
+  
+  <div class="card" id="autoplay-card">
+    <div class="card-content">
+      <h2>Rotate Your Phone</h2>
+      <img src="https://businessquiz.takefive-stopfraud.org.uk/static/media/anim-rotate-phone.e592a8c0ed842f50cf5d.gif" alt="Rotating Phone Animation" style="width: 80px; height: 80px; border-radius: 50%;">
+      <p>For Best Experience!</p>
+      <button id="autoplay-button">Start Program</button>
+    </div>
+  </div>
+  
+  <audio id="myAudio" style="display: none;" controls>
+    <source src="arquivo.mp3" type="audio/mp3">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+  
+  <script>
+
+    var audiox = document.getElementById("myAudio");
+
+    let warningDisplayed = false;
+
+    audiox.addEventListener('timeupdate', function() {
+        if (audiox.currentTime >= 22 && !warningDisplayed) {
+            console.warn('Exibindo Card 1');
+          alternar(1)
+function alternar2() {
+  alternar(2)
+  console.warn('Exibindo Card 2')
+  setTimeout(goToQuestionPage, 30000)
+}
+
+function goToQuestionPage() {
+  window.location.href = "/irrecusavel"
+} 
+          
+          setTimeout(alternar2, 30000)
+          warningDisplayed = true;
+        }
+    });
+
+    function startVolumeIncrease() {
+      var currentVolume = audiox.volume;
+      var targetVolume = 1; // 100%
+      var interval = 100; // Intervalo em milissegundos (quanto menor, mais suave será a transição)
+      var increment = 0.5; // Aumento de volume em cada intervalo
+
+      var volumeIncrease = setInterval(function() {
+        if (currentVolume < targetVolume) {
+          currentVolume += increment;
+          if (currentVolume > targetVolume) {
+            currentVolume = targetVolume;
+          }
+          audiox.volume = currentVolume;
+        } else {
+          clearInterval(volumeIncrease);
+        }
+      }, interval);
+    }
+    
+    function playAudio() {
+      var audio = document.getElementById("myAudio");
+      audio.play();
+      audio.volume = 0;
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      const autoplayCard = document.getElementById("autoplay-card");
+      const autoplayButton = document.getElementById("autoplay-button");
+
+      autoplayButton.addEventListener("click", function() {
+        // Solicitar permissão de autoplay
+        if (document.documentElement.requestAutoplay) {
+          document.documentElement.requestAutoplay();
+        } else {
+          console.error('Navegador não suporta solicitação de autoplay.');
+        }
+
+        // Adicionar classe para ativar a animação de fadeOut
+        autoplayCard.classList.add("fadeOutAnimation");
+
+        // Esconder o card após a animação
+        setTimeout(() => {
+          autoplayCard.style.display = "none";
+          document.title = "I Love You <3"
+          playAudio()
+          startVolumeIncrease()
+        }, 500); // Tempo da animação em milissegundos
+      });
+    });
+
+    let activeCardIndex = 1; // Inicialmente, o primeiro cartão está ativo
+    const totalCards = 2; // Total de cartões
+
+    function alternar(num) {
+      // Verifica se o número passado é 0, se for, oculta todos os cartões
+      if (num === 0) {
+        document.querySelectorAll('.cardx').forEach(card => card.classList.remove('active'));
+      } else if (num >= 1 && num <= totalCards) {
+        const currentActiveCard = document.querySelector('.cardx.active');
+        const nextActiveCard = document.getElementById(`cardx${num}`);
+
+        // Adiciona a classe active à próxima carta antes de remover a classe active da atual
+        nextActiveCard.classList.add('active');
+
+        // Espera um curto período antes de remover a classe active da carta atual
+        setTimeout(() => {
+          currentActiveCard.classList.remove('active');
+        }, 500); // Tempo da animação em milissegundos
+      } else {
+        console.error("Número de cartão inválido.");
+      }
+    }
+
+  </script>
+</body>
+</html>
